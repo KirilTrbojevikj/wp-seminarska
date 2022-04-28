@@ -10,6 +10,8 @@ public interface PostsService {
 
     Optional<Posts> findById(Long id);
 
+    Optional<Posts> findByUsername(String username);
+
     Optional<Posts> save(Posts posts);
 
     Optional<Posts> edit(Long id, Posts posts);
