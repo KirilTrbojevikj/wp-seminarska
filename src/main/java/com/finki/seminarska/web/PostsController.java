@@ -1,7 +1,8 @@
 package com.finki.seminarska.web;
 
+import com.finki.seminarska.model.Category;
 import com.finki.seminarska.model.Posts;
-import com.finki.seminarska.model.Product;
+import com.finki.seminarska.service.CategoryService;
 import com.finki.seminarska.service.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,12 @@ import java.util.List;
 public class PostsController {
 
     private final PostsService postsService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public PostsController(PostsService postsService) {
+    public PostsController(PostsService postsService, CategoryService categoryService) {
         this.postsService = postsService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping
@@ -59,5 +62,13 @@ public class PostsController {
         return ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("/add-post")
+    public String addProductPage(Model model) {
+
+        /*List<Category> categories = this.categoryService.listCategories();
+        model.addAttribute("categories", categories);
+        model.addAttribute("bodyContent", "add-product");*/
+        return "add-form";
+    }
 
 }

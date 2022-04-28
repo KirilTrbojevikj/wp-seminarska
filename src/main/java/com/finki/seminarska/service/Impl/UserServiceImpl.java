@@ -1,5 +1,6 @@
 package com.finki.seminarska.service.Impl;
 
+import com.finki.seminarska.model.Posts;
 import com.finki.seminarska.model.User;
 import com.finki.seminarska.model.exceptions.InvalidUsernameOrPasswordException;
 import com.finki.seminarska.model.exceptions.PasswordsDoNotMatchException;
@@ -7,6 +8,8 @@ import com.finki.seminarska.model.exceptions.UsernameAlreadyExistsException;
 import com.finki.seminarska.repository.UserRepository;
 import com.finki.seminarska.service.UserService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,5 +33,10 @@ public class UserServiceImpl implements UserService {
         //User user = new User(username,passwordEncoder.encode(password),name,surname,userRole);
         User user = new User(username, first_name, last_name, email);
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<Posts> ShowMyPosts() {
+        return null;
     }
 }
