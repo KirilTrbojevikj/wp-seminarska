@@ -2,6 +2,7 @@ package com.finki.seminarska.web;
 
 import com.finki.seminarska.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -12,6 +13,13 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @PostMapping
+    public String getProfilePage(){
+
+
+        return null;
     }
 
 
