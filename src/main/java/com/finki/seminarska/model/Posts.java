@@ -17,15 +17,15 @@ public class Posts {
 
     @OneToOne
     private Category category;
-
-    private String created_by;
+    @OneToOne
+    private User created_by;
 
     private LocalDate date_created;
 
     public Posts() {
     }
 
-    public Posts(Product product, Category category, String created_by, LocalDate date_created) {
+    public Posts(Product product, Category category, User created_by, LocalDate date_created) {
         this.product = product;
         this.category = category;
         this.created_by = created_by;

@@ -26,12 +26,12 @@ public class PostsController {
     }
 
     @GetMapping
-    private String findAll(Model model){
+    private String getProductPage(Model model){
 
         List<Posts> posts = this.postsService.findAll();
         model.addAttribute("posts", posts);
         model.addAttribute("bodyContent", "posts");
-        return "posts";
+        return "master-template";
     }
 
     @GetMapping("/{id}")
@@ -65,10 +65,10 @@ public class PostsController {
     @GetMapping("/add-post")
     public String addProductPage(Model model) {
 
-        /*List<Category> categories = this.categoryService.listCategories();
+        List<Category> categories = this.categoryService.listCategories();
         model.addAttribute("categories", categories);
-        model.addAttribute("bodyContent", "add-product");*/
-        return "add-form";
+        model.addAttribute("bodyContent", "add-form");
+        return "master-template";
     }
 
 }

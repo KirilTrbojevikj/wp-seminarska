@@ -24,11 +24,17 @@ public class CategoryController {
     }
 
     @GetMapping
-    public String findAll(Model model) {
+    public String getCategories(Model model) {
 
         List<Category> categories = this.categoryService.listCategories();
         model.addAttribute("categories", categories);
         model.addAttribute("bodyContent", "categories");
-        return "categories";
+        return "master-template";
+    }
+
+    @GetMapping("/access_denied")
+    public String getAccessDeniedPage(Model model) {
+        model.addAttribute("bodyContent", "access_denied");
+        return "master-template";
     }
 }

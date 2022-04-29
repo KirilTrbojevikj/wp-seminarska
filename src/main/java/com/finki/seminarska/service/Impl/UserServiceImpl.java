@@ -7,6 +7,9 @@ import com.finki.seminarska.model.exceptions.PasswordsDoNotMatchException;
 import com.finki.seminarska.model.exceptions.UsernameAlreadyExistsException;
 import com.finki.seminarska.repository.UserRepository;
 import com.finki.seminarska.service.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +18,17 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userRepository.findByUsername(s).orElseThrow(()->new UsernameNotFoundException(s));
+    }
     @Override
     public User register(String username, String first_name, String last_name, String password, String repeatPassword, String email) {
 
@@ -30,8 +39,7 @@ public class UserServiceImpl implements UserService {
         if (this.userRepository.findByUsername(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
 
-        //User user = new User(username,passwordEncoder.encode(password),name,surname,userRole);
-        User user = new User(username, first_name, last_name, email);
+        User user = new User(username, passwordEncoder.encode(password), first_name, last_name,email);
         return userRepository.save(user);
     }
 
