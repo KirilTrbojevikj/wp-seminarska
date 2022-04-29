@@ -12,7 +12,10 @@ public interface ProductService {
 
     Optional<Product> save(String name, Double price, String description, Category category);
 
-    Optional<Product> edit(Long id, String name, Double price, String description, Category category);
+    Optional<Product> save(String name, Double price, String description, Long categoryId);
+
+    Optional<Product> edit(String name, Double price, String description, Long categoryId);
+
 
     void DeleteById(Long id);
 

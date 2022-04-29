@@ -3,6 +3,7 @@ package com.finki.seminarska.model;
 import lombok.Data;
 
 import javax.persistence.*;
+
 @Data
 @Entity
 public class Product {
@@ -20,7 +21,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, Category category, Double price, String description) {
+    public Product(String name, Double price, String description, Category category) {
         this.name = name;
         this.category = category;
         this.price = price;
