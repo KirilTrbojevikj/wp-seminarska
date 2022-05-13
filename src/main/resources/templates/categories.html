@@ -4,15 +4,41 @@
     <title>Categories</title>
 </head>
 <body>
+<div  sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{/admin/categories/add}" style="margin: 20px 0" class="btn btn-primary">Add Category</a>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">SN</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+        </tr>
+        </thead>
+        <tbody>
 
-<h2>Categories</h2>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <a href="posts.html" th:each="category: ${categories}" >
-                <a th:text="${category.name}" href="" />
-            </a>
+        <tr th:each="category: ${categories}">
+            <td th:text="${category.name}"></td>
+            <td><a href="" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a></td>
+            <td><a href="" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div sec:authorize="hasRole('ROLE_USER')">
+    <h2>Categories</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="posts.html" th:each="category: ${categories}" >
+                    <a th:text="${category.name}" href="" />
+                </a>
+            </div>
         </div>
     </div>
 </div>
+
+
 </body>
